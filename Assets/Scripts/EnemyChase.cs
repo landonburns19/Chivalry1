@@ -91,6 +91,7 @@ public class EnemyChase : MonoBehaviour
             an.SetBool("IsHit", false);
             an.SetBool("IsAttacking", false);
             an.SetBool("IsDead", true);
+            Destroy(gameObject);
         }
     }
 

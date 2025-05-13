@@ -7,6 +7,8 @@ public class PlayerAttack : MonoBehaviour
     public Animator an;
     private float timeBAttack;
     public float startTimeBAttack;
+
+    public PlayerMovement player;
     
 
     public Transform attackPos;
@@ -15,23 +17,24 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     void Update()
     {
-        if(timeBAttack <= 0){
-        if(Input.GetKey(KeyCode.Comma))
-        {
-            an.SetBool("IsAttacking", true);
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, EnemiesInRange);
-            for(int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                enemiesToDamage[i].GetComponent<EnemyChase>().TakeDamage(damage);
+        if(!player.freezeMovement){
+            if(timeBAttack <= 0){
+
+                an.SetBool("IsAttacking", true);
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, EnemiesInRange);
+
+                for(int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<EnemyChase>().TakeDamage(damage);
+                }  
+                timeBAttack = startTimeBAttack;
+
             }
-            
-        }    
-        timeBAttack = startTimeBAttack;
-        }
-        else
-        {
-            an.SetBool("IsAttacking", false);
-            timeBAttack -= Time.deltaTime;
+            else
+            {
+                an.SetBool("IsAttacking", false);
+                timeBAttack -= Time.deltaTime;
+            }
         }
     }
 

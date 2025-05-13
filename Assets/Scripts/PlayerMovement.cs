@@ -37,12 +37,15 @@ public class PlayerMovement : MonoBehaviour
     public Timer timer;
 
     
-    private bool freezeMovement = false;
+    public bool freezeMovement = false;
     private bool isWaiting = false;
 
 
     private bool jump = false;
     private bool fall = true;
+
+
+    public bool isFlipped = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,9 +106,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (transform.position.x > xPos){
             SpriteRenderer.flipX = false;
+            isFlipped = false;
         }
         else if (transform.position.x < xPos){
+
             SpriteRenderer.flipX = true;
+            isFlipped = true;
         }
 
         xPos = transform.position.x;
