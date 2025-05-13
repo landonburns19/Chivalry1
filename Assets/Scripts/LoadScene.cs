@@ -9,4 +9,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
     }
+
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 }
